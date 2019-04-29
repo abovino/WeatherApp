@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import SearchZip from './components/SearchZip.js';
+
+class App extends Component {
+	state = {
+		zipCode: '',
+		weather: null
+	}
+
+	searchChangeHandler = (e) => {
+		this.setState({ zipCode: e.target.value });
+	}
+
+	searchHandler = (e) => {
+		console.log(e.target);
+	}
+
+	render() {
+		return (
+			<div className="app">
+				<SearchZip zipCode={this.state.zipCode} searchHandler={this.searchHandler} />
+			</div>
+		);
+	}
 }
 
 export default App;

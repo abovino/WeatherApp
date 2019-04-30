@@ -1,10 +1,14 @@
 import React from 'react';
+import './SearchZip.css';
 
 const SearchZip = ( props ) => {
 	return (
-		<div>
-			<input type="text" value={props.zipCode} onChange={props.searchChangeHandler}/>
-			<button onClick={props.searchHandler}>Search</button>
+		<div className="search-container">
+			<input 
+				type="search"
+				className="search"
+				value={props.zipCode} 
+				onChange={props.searchChangeHandler} />
 		</div>
 	)
 }

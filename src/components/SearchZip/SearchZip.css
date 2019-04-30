@@ -20,6 +20,11 @@
 	outline: none;
 }
 
+.search::placeholder {
+	font-style: italic;
+	color: #ccc;
+}
+
 .search-btn {
 	/* position: absolute; */
 	margin-top: 25px;

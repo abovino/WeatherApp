@@ -7,6 +7,7 @@ const SearchZip = ( props ) => {
 			<input 
 				type="search"
 				className="search"
+				placeholder="Zip Code"
 				value={props.zipCode} 
 				onChange={props.searchChangeHandler} />
 		</div>

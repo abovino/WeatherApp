@@ -1,0 +1,26 @@
+.weather-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.weather-container > p {
+	margin: 0;
+	color: #efefef;
+	font-weight: 100;
+}
+
+.city {
+	font-size: 18px;
+	margin-top: 50px !important;
+}
+
+.description {	
+	text-transform: capitalize;
+	font-size: 30px;
+}
+
+.temperature {
+	font-size: 60px;
+	text-indent: 8px;
+}

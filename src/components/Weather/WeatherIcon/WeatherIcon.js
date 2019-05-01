@@ -7,9 +7,8 @@ const WeatherIcon = ( props ) => {
 	// let icon = <i className="wi wi-day-cloudy-gusts"></i>;
 	let classes = '';
 
-	weatherConditions.map( (condition, index) => {
+	weatherConditions.map( condition => {
 		if (currentWeather.id === condition.id) {
-			console.log(currentWeather, condition);
 			classes = condition.day_icon_class;
 			return;
 		}

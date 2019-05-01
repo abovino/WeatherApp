@@ -10,49 +10,8 @@ class App extends Component {
 	state = {
 		zipCode: '',
 		weatherConditions: weatherConditions,
-		weather: {
-			coord: {
-				lon: -74.64,
-				lat: 40.87
-			},
-			weather: [
-				{
-					id: 804,
-					main: "Clouds",
-					description: "overcast clouds",
-					icon: "04n"
-				}
-			],
-			base: "stations",
-			main: {
-				temp: 283.52,
-				pressure: 1026,
-				humidity: 57,
-				temp_min: 282.04,
-				temp_max: 285.37
-			},
-			visibility: 16093,
-			wind: {
-				speed: 3.1,
-				deg: 160
-			},
-			clouds: {
-				all: 90
-			},
-			dt: 1556587425,
-			sys: {
-				type: 1,
-				id: 4686,
-				message: 0.0107,
-				country: "US",
-				sunrise: 1556531979,
-				sunset: 1556581919
-			},
-			id: 420025548,
-			name: "Paterson",
-			cod: 200
-		}
-	}
+		weather: null
+	};
 	
 	searchChangeHandler = (e) => {
 		let zipCode = e.target.value;
@@ -71,19 +30,28 @@ class App extends Component {
 				});
 			}
 		});
-	}
+	};
 
 	render() {
-		console.log(this.state);
+		let weather = <div></div>;
+		
+		// if this.state.weather is not null
+		if (this.state.weather) {
+			weather = (
+				<Weather 
+					weatherConditions={this.state.weatherConditions}
+					datetime={this.state.weather.dt}
+					weather={this.state.weather} />
+			)
+		};
+
 		return (
 			<div className="app">
 				<SearchZip
 					zipCode={this.state.zipCode}
 					searchHandler={this.searchHandler}
 					searchChangeHandler={this.searchChangeHandler} />
-				<Weather 
-					datetime={this.state.weather.dt}
-					weather={this.state.weather} />
+				{weather}
 			</div>
 		);
 	}

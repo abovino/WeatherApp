@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import API from './api.js';
+import weatherConditions from './weatherConditions.js';
 
 import SearchZip from './components/SearchZip/SearchZip.js';
 import Weather from './components/Weather/Weather.js';
@@ -8,6 +9,7 @@ import Weather from './components/Weather/Weather.js';
 class App extends Component {
 	state = {
 		zipCode: '',
+		weatherConditions: weatherConditions,
 		weather: {
 			coord: {
 				lon: -74.64,
@@ -79,7 +81,9 @@ class App extends Component {
 					zipCode={this.state.zipCode}
 					searchHandler={this.searchHandler}
 					searchChangeHandler={this.searchChangeHandler} />
-				<Weather weather={this.state.weather} />
+				<Weather 
+					datetime={this.state.weather.dt}
+					weather={this.state.weather} />
 			</div>
 		);
 	}

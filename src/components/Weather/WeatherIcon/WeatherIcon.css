@@ -1,4 +1,5 @@
 .weather-icon-container {
-	font-size: 109px;
+	font-size: 125px;
+	margin-top: 10px;
 	color: rgba(239, 239, 239, 0.9);
 }

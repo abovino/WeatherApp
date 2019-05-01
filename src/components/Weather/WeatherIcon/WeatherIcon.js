@@ -2,18 +2,23 @@ import React from 'react';
 import './WeatherIcon.css';
 
 const WeatherIcon = ( props ) => {
-	let icon = <i className="wi wi-day-cloudy-gusts"></i>;
-	switch (props.weather.main) {
-		case "Clouds":
-			
-			break;
+	const currentWeather = props.weather;
+	const weatherConditions = props.weatherConditions;
+	// let icon = <i className="wi wi-day-cloudy-gusts"></i>;
+	let classes = '';
+
+	weatherConditions.map( (condition, index) => {
+		if (currentWeather.id === condition.id) {
+			console.log(currentWeather, condition);
+			classes = condition.day_icon_class;
+			return;
+		}
+	});
 	
-		default:
-			break;
-	}
+	console.log(classes);
 	return (
 		<div className="weather-icon-container">
-			<i className="wi wi-day-cloudy-gusts"></i>
+			<i className={`wi ${classes}`}></i>
 		</div>
 	)
 }

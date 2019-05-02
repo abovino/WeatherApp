@@ -338,7 +338,7 @@ const weatherConditions = [
   {
     "main": "Haze",
     "id": 721,
-    "short_description": "Haze Advisory",
+    "short_description": "Haze",
     "description": "Haze",
     "day_icon_class": "wi-day-haze",
     "night_icon_class": "wi-night-fog"

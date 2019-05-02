@@ -6,13 +6,17 @@ const WeatherIcon = ( props ) => {
 	const weatherConditions = props.weatherConditions;
 	// let icon = <i className="wi wi-day-cloudy-gusts"></i>;
 	let classes = '';
-
-	weatherConditions.map( condition => {
-		if (currentWeather.id === condition.id) {
-			classes = condition.day_icon_class;
-			return;
+	
+	for (let i = 0; i < weatherConditions.length; i++) {
+		if (currentWeather.id === weatherConditions[i].id) {
+			if (props.isLightOut) {
+				classes = weatherConditions[i].day_icon_class;
+				break;
+			}
+			classes = weatherConditions[i].night_icon_class;
+			break;
 		}
-	});
+	}
 	
 	console.log(classes);
 	return (

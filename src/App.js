@@ -9,7 +9,7 @@ import Weather from './components/Weather/Weather.js';
 class App extends Component {
 	state = {
 		zipCode: '',
-		isLightOutside: true,
+		isLightOut: true,
 		weatherConditions: weatherConditions,
 		weather: null,
 		hourlyWeather: null
@@ -33,14 +33,14 @@ class App extends Component {
 					const sunrise = currentRes.data.sys.sunrise // sunrise in unix time
 					const sunset = currentRes.data.sys.sunset // sunset in unix time
 					const currentTime = currentRes.data.dt // current weather station unix time
-					let isLightOutside = false;
+					let isLightOut = false;
 
 					if (currentTime > sunrise && currentTime < sunset) {
-						isLightOutside = true;
+						isLightOut = true;
 					}
 
 					this.setState({
-						isLightOutside: isLightOutside,
+						isLightOut: isLightOut,
 						weather: currentRes.data,
 						hourlyWeather: hourlyRes.data
 					});
@@ -59,12 +59,13 @@ class App extends Component {
 					weatherConditions={this.state.weatherConditions}
 					datetime={this.state.weather.dt}
 					weather={this.state.weather}
-					hourlyWeather={this.state.hourlyWeather} />
+					hourlyWeather={this.state.hourlyWeather}
+					isLightOut={this.state.isLightOut} />
 			)
 		};
 
 		return (
-			<div className={this.state.isLightOutside ? 'app':'app dark'}>
+			<div className={this.state.isLightOut ? 'app':'app dark'}>
 				<SearchZip
 					zipCode={this.state.zipCode}
 					searchHandler={this.searchHandler}

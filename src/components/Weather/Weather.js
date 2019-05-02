@@ -6,15 +6,18 @@ import HourlyWeather from './HourlyWeather/HourlyWeather.js';
 
 const Weather = ( props ) => {
 	const currentWeather = props.weather.weather[0];
+	const weatherConditions = props.weatherConditions;
 	const temperature = (props.weather.main.temp - 273.15) * 9 / 5 + 32; // convert kelvin to fahrenheit
 	const city = props.weather.name;
 	let description = '';
 
-	props.weatherConditions.map( condition => {
-		if (currentWeather.id === condition.id) {
-			description = condition.short_description;
+	// loop through all possible weather conditions and find matching weather id
+	for (let i = 0; i < weatherConditions.length; i++) {
+		if (currentWeather.id === weatherConditions[i].id) {
+			description = weatherConditions[i].short_description
+			break;
 		}
-	})
+	}
 
 	return (
 		<div key={props.datetime} className="weather-container">
@@ -23,10 +26,12 @@ const Weather = ( props ) => {
 			<p className="temperature">{temperature.toFixed(0)}&#176;</p>
 			<WeatherIcon 
 				weather={props.weather.weather[0]}
-				weatherConditions={props.weatherConditions} />
+				weatherConditions={props.weatherConditions}
+				isLightOut={props.isLightOut} />
 			<HourlyWeather 
 				hourlyWeather={props.hourlyWeather}
-				weatherConditions={props.weatherConditions} />
+				weatherConditions={props.weatherConditions}
+				isLightOut={props.isLightOut} />
 		</div>
 	)
 }

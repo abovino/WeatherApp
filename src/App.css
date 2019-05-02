@@ -5,3 +5,7 @@
 	box-sizing: border-box;
 	color: #efefef;
 }
+
+.dark {
+	background-image: linear-gradient(to bottom right, #5a595a, #07080c);
+}

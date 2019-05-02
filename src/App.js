@@ -9,6 +9,7 @@ import Weather from './components/Weather/Weather.js';
 class App extends Component {
 	state = {
 		zipCode: '',
+		isLightOutside: true,
 		weatherConditions: weatherConditions,
 		weather: null,
 		hourlyWeather: null
@@ -29,7 +30,17 @@ class App extends Component {
 					axios.get(hourlyWeatherUrl)
 				])
 				.then(axios.spread((currentRes, hourlyRes) => {
+					const sunrise = currentRes.data.sys.sunrise // sunrise in unix time
+					const sunset = currentRes.data.sys.sunset // sunset in unix time
+					const currentTime = currentRes.data.dt // current weather station unix time
+					let isLightOutside = false;
+
+					if (currentTime > sunrise && currentTime < sunset) {
+						isLightOutside = true;
+					}
+
 					this.setState({
+						isLightOutside: isLightOutside,
 						weather: currentRes.data,
 						hourlyWeather: hourlyRes.data
 					});
@@ -53,7 +64,7 @@ class App extends Component {
 		};
 
 		return (
-			<div className="app">
+			<div className={this.state.isLightOutside ? 'app':'app dark'}>
 				<SearchZip
 					zipCode={this.state.zipCode}
 					searchHandler={this.searchHandler}

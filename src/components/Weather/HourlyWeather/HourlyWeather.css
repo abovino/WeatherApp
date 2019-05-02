@@ -1,0 +1,20 @@
+.hourly-container {
+	overflow-y: auto;
+	position: fixed;
+	bottom: 0;
+	height: 310px;
+}
+
+.hourly-table {
+	width: 100vw;
+	text-align: center;
+}
+
+.hour > td {
+	width: 33.33%;
+}
+
+.hour {
+	font-size: 20px;
+	font-weight: 100;
+}

@@ -24,7 +24,9 @@ const Weather = ( props ) => {
 			<WeatherIcon 
 				weather={props.weather.weather[0]}
 				weatherConditions={props.weatherConditions} />
-			<HourlyWeather hourlyWeather={props.hourlyWeather} />
+			<HourlyWeather 
+				hourlyWeather={props.hourlyWeather}
+				weatherConditions={props.weatherConditions} />
 		</div>
 	)
 }

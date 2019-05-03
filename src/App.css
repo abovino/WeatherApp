@@ -1,9 +1,11 @@
+
 .app {
 	background-image: linear-gradient(to bottom right, #817b90, #9198e5);
 	height: 100vh;
 	width: 100vw;
 	box-sizing: border-box;
 	color: #efefef;
+	overflow: auto;
 }
 
 .dark {

@@ -31,11 +31,13 @@ const Weather = ( props ) => {
 				isLightOut={props.isLightOut} />
 			<SunriseSunset 
 				sunrise={props.sunrise}
-				sunset={props.sunset} />
+				sunset={props.sunset}
+				timeZone={props.timeZone} />
 			<HourlyWeather 
 				hourlyWeather={props.hourlyWeather}
 				weatherConditions={props.weatherConditions}
-				isLightOut={props.isLightOut} />
+				isLightOut={props.isLightOut}
+				timeZone={props.timeZone} />
 		</div>
 	)
 }

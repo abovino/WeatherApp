@@ -25,6 +25,7 @@ class App extends Component {
 			zipCode: zipCode
 		}, () => {
 			if (zipCode.length === 5) {
+				// Get the current and hourly weather
 				const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${this.state.zipCode},us&appid=2b7618456915076d8232a8ff55d6f5f5`;
 				const hourlyWeatherUrl  = `http://api.openweathermap.org/data/2.5/forecast?zip=${this.state.zipCode},us&appid=2b7618456915076d8232a8ff55d6f5f5`;
 				axios.all([
@@ -32,37 +33,44 @@ class App extends Component {
 					axios.get(hourlyWeatherUrl)
 				])
 				.then(axios.spread((currentRes, hourlyRes) => {
+					// use the lat/lon coords. returned in previous request to get the timezone
 					const latitude = currentRes.data.coord.lat;
 					const longitude = currentRes.data.coord.lon;
 					const timezoneUrl = `http://api.timezonedb.com/v2.1/get-time-zone?key=8E0SAIB5Z6L8&format=json&by=position&lat=${latitude}&lng=${longitude}`;
-					const sunrise = currentRes.data.sys.sunrise // sunrise in unix time
-					const sunset = currentRes.data.sys.sunset // sunset in unix time
-					const currentTime = currentRes.data.dt // current weather station unix time
-					let isLightOut = false;
 					let timeZone = '';
 
+					// Send request and in the promise call the handleSearchStateChange method
+					// 	and pass all 3 responses to update the state
 					axios.get(timezoneUrl).then( response => {
 						timeZone = response.data.zoneName;
-					}).catch(error => {
-						console.log(error); // Handle this error eventually 
+						this.handleSearchStateChange(currentRes, hourlyRes, timeZone);
 					})
 
-					if (currentTime > sunrise && currentTime < sunset) {
-						isLightOut = true;
-					}
-
-					this.setState({
-						isLightOut: isLightOut,
-						weather: currentRes.data,
-						hourlyWeather: hourlyRes.data,
-						sunrise: sunrise,
-						sunset: sunset,
-						timeZone: timeZone,
-					});
 				}));
 			}
 		});
 	};
+
+	// Receives 3 GET request responses to update state
+	handleSearchStateChange(currentRes, hourlyRes, timeZone) {
+		const sunrise = currentRes.data.sys.sunrise // sunrise in unix time
+		const sunset = currentRes.data.sys.sunset // sunset in unix time
+		const currentTime = currentRes.data.dt // current weather station unix time
+		let isLightOut = false;
+
+		if (currentTime > sunrise && currentTime < sunset) {
+			isLightOut = true;
+		}
+
+		this.setState({
+			isLightOut: isLightOut,
+			weather: currentRes.data,
+			hourlyWeather: hourlyRes.data,
+			sunrise: sunrise,
+			sunset: sunset,
+			timeZone: timeZone,
+		});
+	}
 
 	render() {
 		let weather = <div></div>;
@@ -77,7 +85,8 @@ class App extends Component {
 					hourlyWeather={this.state.hourlyWeather}
 					isLightOut={this.state.isLightOut}
 					sunrise={this.state.sunrise}
-					sunset={this.state.sunset} />
+					sunset={this.state.sunset}
+					timeZone={this.state.timeZone} />
 			)
 		};
 

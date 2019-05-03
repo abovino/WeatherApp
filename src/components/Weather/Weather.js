@@ -2,6 +2,7 @@ import React from 'react';
 import './Weather.css';
 
 import WeatherIcon from './WeatherIcon/WeatherIcon.js';
+import SunriseSunset from './SunriseSunset/SunriseSunset.js';
 import HourlyWeather from './HourlyWeather/HourlyWeather.js';
 
 const Weather = ( props ) => {
@@ -28,6 +29,9 @@ const Weather = ( props ) => {
 				weather={props.weather.weather[0]}
 				weatherConditions={props.weatherConditions}
 				isLightOut={props.isLightOut} />
+			<SunriseSunset 
+				sunrise={props.sunrise}
+				sunset={props.sunset} />
 			<HourlyWeather 
 				hourlyWeather={props.hourlyWeather}
 				weatherConditions={props.weatherConditions}

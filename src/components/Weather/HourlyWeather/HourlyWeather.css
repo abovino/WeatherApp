@@ -1,9 +1,9 @@
 .hourly-container {
 	overflow-y: auto;
-	position: fixed;
 	bottom: 0;
 	height: 310px;
 	padding-top: 10px;
+	margin-top: 15px;
 	border-top: 1px solid #efefef;
 }
 

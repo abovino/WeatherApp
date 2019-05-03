@@ -12,9 +12,11 @@ class App extends Component {
 		isLightOut: true,
 		weatherConditions: weatherConditions,
 		weather: null,
-		hourlyWeather: null
+		hourlyWeather: null,
+		sunrise: null,
+		sunset: null,
 	};
-	
+
 	searchChangeHandler = (e) => {
 		let zipCode = e.target.value;
 		// set the zipCode state and pass a callback function to check if state.zipCode.length is > 5, if so fire api requests
@@ -42,7 +44,9 @@ class App extends Component {
 					this.setState({
 						isLightOut: isLightOut,
 						weather: currentRes.data,
-						hourlyWeather: hourlyRes.data
+						hourlyWeather: hourlyRes.data,
+						sunrise: sunrise,
+						sunset: sunset,
 					});
 				}));
 			}
@@ -60,7 +64,9 @@ class App extends Component {
 					datetime={this.state.weather.dt}
 					weather={this.state.weather}
 					hourlyWeather={this.state.hourlyWeather}
-					isLightOut={this.state.isLightOut} />
+					isLightOut={this.state.isLightOut}
+					sunrise={this.state.sunrise}
+					sunset={this.state.sunset} />
 			)
 		};
 

@@ -20,3 +20,19 @@
 	font-size: 20px;
 	font-weight: 100;
 }
+
+@media (min-width:641px) {
+	.hourly-container {
+		height: auto;
+		border: none;
+		margin-top: 16px;
+		padding: 0;
+	}
+	.hourly-table {
+		width: 100%;
+	}
+
+	.hour > td {
+		padding: 4px 0;
+	}
+}

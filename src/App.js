@@ -5,6 +5,11 @@ import weatherConditions from './weatherConditions.js';
 
 import SearchZip from './components/SearchZip/SearchZip.js';
 import Weather from './components/Weather/Weather.js';
+import WeatherDetails from './components/Weather/WeatherDetails/WeatherDetails.js';
+import WeatherIcon from './components/Weather/WeatherIcon/WeatherIcon.js';
+import SunriseSunset from './components/Weather/SunriseSunset/SunriseSunset.js';
+import HourlyWeather from './components/Weather/HourlyWeather/HourlyWeather.js';
+
 
 class App extends Component {
 	state = {
@@ -20,6 +25,16 @@ class App extends Component {
 
 	searchChangeHandler = (e) => {
 		let zipCode = e.target.value;
+
+		// If user deletes all chars in input box then setstate to e.target.value IE: ''
+		// Else if user tries to enter a non-numeric value then return and do nothing
+		if (zipCode < 1) {
+			this.setState({ zipCode: zipCode})
+			return;
+		} else if (!Number(zipCode)) {
+			// return, do nothing 
+			return;
+		}
 		// set the zipCode state and pass a callback function to check if state.zipCode.length is > 5, if so fire api requests
 		this.setState({
 			zipCode: zipCode
@@ -78,25 +93,43 @@ class App extends Component {
 		// if this.state.weather is not null
 		if (this.state.weather) {
 			weather = (
-				<Weather 
-					weatherConditions={this.state.weatherConditions}
-					datetime={this.state.weather.dt}
-					weather={this.state.weather}
-					hourlyWeather={this.state.hourlyWeather}
-					isLightOut={this.state.isLightOut}
-					sunrise={this.state.sunrise}
-					sunset={this.state.sunset}
-					timeZone={this.state.timeZone} />
+					<div key={this.state.weather.dt} className="desktop-container">
+						<div className="left">
+							<WeatherDetails
+								datetime={this.state.weather.dt}
+								city={this.state.weather.name}
+								temperature={this.state.weather.main.temp}
+								weatherId={this.state.weather.weather[0].id}
+								weatherConditions={this.state.weatherConditions} />
+							<WeatherIcon 
+								weather={this.state.weather.weather[0]}
+								weatherConditions={this.state.weatherConditions}
+								isLightOut={this.state.isLightOut} />
+						</div>
+						<div className="right">
+							<SunriseSunset 
+								sunrise={this.state.sunrise}
+								sunset={this.state.sunset}
+								timeZone={this.state.timeZone} />
+							<HourlyWeather 
+								hourlyWeather={this.state.hourlyWeather}
+								weatherConditions={this.state.weatherConditions}
+								isLightOut={this.state.isLightOut}
+								timeZone={this.state.timeZone} />
+						</div>
+					</div>
 			)
 		};
 
 		return (
 			<div className={this.state.isLightOut ? 'app':'app dark'}>
-				<SearchZip
-					zipCode={this.state.zipCode}
-					searchHandler={this.searchHandler}
-					searchChangeHandler={this.searchChangeHandler} />
-				{weather}
+				<div className="main-container">
+					<SearchZip
+						zipCode={this.state.zipCode}
+						searchHandler={this.searchHandler}
+						searchChangeHandler={this.searchChangeHandler} />
+					{weather}
+				</div>
 			</div>
 		);
 	}

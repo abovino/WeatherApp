@@ -1,4 +1,13 @@
 .weather-icon-container {
+	width: fit-content;
+	margin: 0 auto;
 	font-size: 90px;
 	color: rgba(239, 239, 239, 0.9);
+}
+
+@media (min-width: 641px) {
+	.weather-icon-container {
+		font-size: 115px;
+		padding-top: 20px;
+	}
 }

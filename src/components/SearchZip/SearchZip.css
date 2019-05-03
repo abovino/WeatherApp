@@ -1,4 +1,6 @@
 .search-container {
+	position: fixed;
+	top: 0;
 	width: 100vw;
 	display: flex;
 	justify-content: center;
@@ -31,4 +33,15 @@
 	font-size: 13px;
 	padding: 5px;
 	color: #807777;
+}
+
+@media (min-width:641px) {
+	.search-container {
+		margin: 0 auto;
+	}
+
+	.search {
+		padding: 10px;
+		font-size: 26px; 
+	}
 }

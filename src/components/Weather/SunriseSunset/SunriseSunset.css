@@ -15,3 +15,18 @@
 .sun-icons {
 	font-size: 32px;
 }
+
+@media (min-width:641px) {
+	.sun-container {
+		border-top: none;
+		margin-top: 29px;
+	}
+
+	.sun-container > table {
+		font-size: 22px;
+	}
+
+	.sun-icons {
+		font-size: 34px;
+	}
+}

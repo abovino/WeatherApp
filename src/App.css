@@ -10,3 +10,31 @@
 .dark {
 	background-image: linear-gradient(to bottom right, #5a595a, #07080c);
 }
+
+.desktop-container {
+	animation: fadeIn 1s ease-out;
+	margin-top: 40px;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@media (min-width:641px) {
+	.desktop-container {
+		display: flex;
+		justify-content: center;
+		margin-top: 15vh;
+	}
+
+	.left, .right {
+		width: 35vw;
+	}
+	
+}

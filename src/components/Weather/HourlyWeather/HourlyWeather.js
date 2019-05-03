@@ -8,7 +8,11 @@ const HourlyWeather = ( props ) => {
 	let hours = props.hourlyWeather.list.map( (hour, index) => {
 		// Include only the next 24 hours
 		if (index < 8) {
-			const time = new Date(hour.dt * 1000).toLocaleString(undefined, { hour: '2-digit' }).toLowerCase();
+			const time = new Date(hour.dt * 1000).toLocaleString('en-US', { 
+				timeZone: props.timeZone,
+				hour: '2-digit'
+			}).toLowerCase();
+
 			let iconClasses = '';
 
 			for (let i = 0; i < weatherConditions.length; i++) {
@@ -30,7 +34,8 @@ const HourlyWeather = ( props ) => {
 				</tr>
 			)
 		}
-	})
+	});
+	
 	return (
 		<div className="hourly-container">
 			<table className="hourly-table">

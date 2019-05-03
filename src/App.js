@@ -4,7 +4,6 @@ import axios from 'axios';
 import weatherConditions from './weatherConditions.js';
 
 import SearchZip from './components/SearchZip/SearchZip.js';
-import Weather from './components/Weather/Weather.js';
 import WeatherDetails from './components/Weather/WeatherDetails/WeatherDetails.js';
 import WeatherIcon from './components/Weather/WeatherIcon/WeatherIcon.js';
 import SunriseSunset from './components/Weather/SunriseSunset/SunriseSunset.js';

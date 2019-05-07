@@ -28,13 +28,12 @@
 
 @media (min-width:641px) {
 	.desktop-container {
-		display: flex;
-		justify-content: center;
 		margin-top: 15vh;
 	}
 
 	.left, .right {
 		width: 35vw;
+		margin: 0 auto;
 	}
 	
 }

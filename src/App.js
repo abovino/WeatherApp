@@ -71,7 +71,7 @@ class App extends Component {
 		if (currentWeatherRes.status === 200 && hourlyWeatherRes.status === 200) {
 			const currentWeather = await currentWeatherRes.json();
 			const hourlyWeather = await hourlyWeatherRes.json();
-			const timeZoneRes = await fetch(`http://api.timezonedb.com/v2.1/get-time-zone?key=${TIME_ZONE_API_KEY}&format=json&by=position&lat=${currentWeather.coord.lat}&lng=${currentWeather.coord.lon}`);
+			const timeZoneRes = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=${TIME_ZONE_API_KEY}&format=json&by=position&lat=${currentWeather.coord.lat}&lng=${currentWeather.coord.lon}`);
 
 			if (timeZoneRes.status === 200) {
 				const timeZone = await timeZoneRes.json();

@@ -5,6 +5,7 @@
 	box-sizing: border-box;
 	color: #efefef;
 	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 }
 
 .dark {

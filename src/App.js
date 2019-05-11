@@ -63,13 +63,15 @@ class App extends Component {
 	}
 
 	async getWeather(zipCode) {
-		const currentWeatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=2b7618456915076d8232a8ff55d6f5f5`);
-		const hourlyWeatherRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&appid=2b7618456915076d8232a8ff55d6f5f5`);
+		const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+		const TIME_ZONE_API_KEY = process.env.REACT_APP_TIME_ZONE_API_KEY;
+		const currentWeatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${WEATHER_API_KEY}`);
+		const hourlyWeatherRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&appid=${WEATHER_API_KEY}`);
 
 		if (currentWeatherRes.status === 200 && hourlyWeatherRes.status === 200) {
 			const currentWeather = await currentWeatherRes.json();
 			const hourlyWeather = await hourlyWeatherRes.json();
-			const timeZoneRes = await fetch(`http://api.timezonedb.com/v2.1/get-time-zone?key=8E0SAIB5Z6L8&format=json&by=position&lat=${currentWeather.coord.lat}&lng=${currentWeather.coord.lon}`);
+			const timeZoneRes = await fetch(`http://api.timezonedb.com/v2.1/get-time-zone?key=${TIME_ZONE_API_KEY}&format=json&by=position&lat=${currentWeather.coord.lat}&lng=${currentWeather.coord.lon}`);
 
 			if (timeZoneRes.status === 200) {
 				const timeZone = await timeZoneRes.json();

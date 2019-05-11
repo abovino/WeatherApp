@@ -18,7 +18,6 @@ const WeatherIcon = ( props ) => {
 		}
 	}
 	
-	console.log(classes);
 	return (
 		<div className="weather-icon-container">
 			<i className={`wi ${classes}`}></i>

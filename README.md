@@ -4,8 +4,6 @@ A weather app to display current and 24 hour weather.
 
 ## Todo (MVP)
 
+* Loading spinner for long API requests
 * Add error handling for failed API requests
-* ~~Refactor and tidy up~~
-* ~~Responsive layout for mobile and desktop~~
 * Add screen shots to README
-* ~~Deploy~~

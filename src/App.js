@@ -29,7 +29,10 @@ class App extends Component {
 		if (zipCode < 1) {
 			this.setState({ zipCode: zipCode})
 			return;
-		} else if (!Number(zipCode)) {
+		} else if (zipCode.length > 5){
+			return;
+		} 
+		else if (!Number(zipCode)) {
 			// return, do nothing 
 			return;
 		}

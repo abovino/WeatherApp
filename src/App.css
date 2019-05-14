@@ -14,7 +14,6 @@
 
 .desktop-container {
 	animation: fadeIn 1s ease-out;
-	margin-top: 40px;
 }
 
 @keyframes fadeIn {
@@ -28,13 +27,8 @@
 }
 
 @media (min-width:641px) {
-	.desktop-container {
-		margin-top: 15vh;
-	}
-
 	.left, .right {
 		width: 35vw;
 		margin: 0 auto;
 	}
-	
 }

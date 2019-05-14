@@ -28,11 +28,18 @@
 		margin-top: 16px;
 		padding: 0;
 	}
+	
 	.hourly-table {
 		width: 100%;
 	}
 
 	.hour > td {
 		padding: 4px 0;
+	}
+}
+
+@media (min-width:641px) {
+	.hour {
+		font-size: 28px;
 	}
 }

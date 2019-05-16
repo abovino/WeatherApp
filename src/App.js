@@ -126,6 +126,7 @@ class App extends Component {
 
 		return (
 			<div className={this.state.isLightOut ? 'app':'app dark'}>
+				{ // Add temperature toggle btn here}
 				<div className="main-container">
 					<SearchZip
 						zipCode={this.state.zipCode}

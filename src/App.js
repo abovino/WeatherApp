@@ -8,7 +8,6 @@ import WeatherIcon from './components/Weather/WeatherIcon/WeatherIcon.js';
 import SunriseSunset from './components/Weather/SunriseSunset/SunriseSunset.js';
 import HourlyWeather from './components/Weather/HourlyWeather/HourlyWeather.js';
 
-
 class App extends Component {
 	state = {
 		zipCode: '',

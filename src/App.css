@@ -12,6 +12,10 @@
 	background-image: linear-gradient(to bottom right, #5a595a, #07080c);
 }
 
+.error-container {
+	animation: fadeIn 1s ease-out;
+}
+
 .desktop-container {
 	animation: fadeIn 1s ease-out;
 }

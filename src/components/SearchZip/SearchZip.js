@@ -10,6 +10,7 @@ const SearchZip = ( props ) => {
 				placeholder="Zip Code"
 				value={props.zipCode} 
 				onChange={props.searchChangeHandler} />
+				<button type='submit' className='fas fa-search search-btn'></button>
 		</form>
 	)
 }

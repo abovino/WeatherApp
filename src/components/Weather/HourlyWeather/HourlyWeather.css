@@ -1,14 +1,13 @@
 .hourly-container {
 	overflow-y: auto;
 	bottom: 0;
-	height: 310px;
 	padding-top: 10px;
 	margin-top: 15px;
 	border-top: 1px solid #efefef;
 }
 
 .hourly-table {
-	width: 100vw;
+	width: 100%;
 	text-align: center;
 }
 

@@ -14,7 +14,7 @@ class App extends Component {
 		zipCode: '',
 		isLightOut: true,
 		weatherConditions: weatherConditions,
-		weather: null,
+		currentWeather: null,
 		hourlyWeather: null,
 		sunrise: null,
 		sunset: null,
@@ -24,8 +24,8 @@ class App extends Component {
 
 	searchChangeHandler = (e) => {
     let zipCode = e.target.value;
-    // Regex to check if user inputs letters
-    if (/^[0-9\b]+$/.test(zipCode) || zipCode.length === 0){
+    // Regex test to make sure user only enters number
+    if (/^[0-9\b]+$/.test(zipCode) || zipCode.length === 0) {
       this.setState({
         zipCode
       });
@@ -33,12 +33,15 @@ class App extends Component {
   }
   
   handleSubmit = async (e) => {
-    e.preventDefault();
-    this.getWeather(this.state.zipCode).then(({ currentWeather, hourlyWeather, timeZone }) => {
+		e.preventDefault();
+		if (this.state.zipCode.length < 1) {
+			return;
+		}
+    this.getWeather(this.state.zipCode).then(({ currentWeather, hourlyWeather, timeZoneData }) => {
       const sunrise = currentWeather.sys.sunrise; // sunrise in unix time
       const sunset = currentWeather.sys.sunset; // sunset in unix time
       const currentTime = currentWeather.dt; // current weather station unix time
-      const timeZoneName = timeZone.zoneName; 
+      const timeZone = timeZoneData.zoneName; 
       let isLightOut = false;
 
       if (currentTime > sunrise && currentTime < sunset) {
@@ -46,12 +49,12 @@ class App extends Component {
       }
 
       this.setState({
-        isLightOut: isLightOut,
-        weather: currentWeather,
-        hourlyWeather: hourlyWeather,
-        sunrise: sunrise,
-        sunset: sunset,
-        timeZone: timeZoneName,
+        isLightOut,
+        currentWeather,
+        hourlyWeather,
+        sunrise,
+        sunset,
+        timeZone,
         isError: false,
       })
     }).catch(err => {
@@ -65,8 +68,8 @@ class App extends Component {
 		const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
     const TIME_ZONE_API_KEY = process.env.REACT_APP_TIME_ZONE_API_KEY;
     const openWeatherApiUrl = 'https://api.openweathermap.org/data/2.5'
-    const currentWeatherRes = await fetch(`${openWeatherApiUrl}/weather?zip=${this.state.zipCode},us&appid=${WEATHER_API_KEY}`);
-    const hourlyWeatherRes = await fetch(`${openWeatherApiUrl}/forecast?zip=${this.state.zipCode},us&appid=${WEATHER_API_KEY}`);
+    const currentWeatherRes = await fetch(`${openWeatherApiUrl}/weather?zip=${zipCode},us&appid=${WEATHER_API_KEY}`);
+    const hourlyWeatherRes = await fetch(`${openWeatherApiUrl}/forecast?zip=${zipCode},us&appid=${WEATHER_API_KEY}`);
     
     if (currentWeatherRes.status === 200 && hourlyWeatherRes.status === 200) {
 			const currentWeather = await currentWeatherRes.json();
@@ -74,17 +77,15 @@ class App extends Component {
 			const timeZoneRes = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=${TIME_ZONE_API_KEY}&format=json&by=position&lat=${currentWeather.coord.lat}&lng=${currentWeather.coord.lon}`);
 
 			if (timeZoneRes.status === 200) {
-				const timeZone = await timeZoneRes.json();
+				const timeZoneData = await timeZoneRes.json();
 				return ({
-					currentWeather: currentWeather,
-					hourlyWeather: hourlyWeather,
-					timeZone: timeZone,
+					currentWeather,
+					hourlyWeather,
+					timeZoneData,
 				});
 			};
 
-		} else {
-			console.log('ERROR');
-		};
+		}
 	};
 
 	render() {
@@ -94,22 +95,22 @@ class App extends Component {
     if (this.state.isError) {
       weather = (
         <div className="error-container">
-          <p>Zip code not found</p>
+          <h2>Zip code not found</h2>
           <p>Please try again</p>
         </div>
       )
-    } else if (this.state.weather) {
+    } else if (this.state.currentWeather) {
 			weather = (
-					<div key={this.state.weather.dt} className="desktop-container">
+					<div key={this.state.currentWeather.dt} className="desktop-container">
 						<div>
 							<WeatherDetails
-								datetime={this.state.weather.dt}
-								city={this.state.weather.name}
-								temperature={this.state.weather.main.temp}
-								weatherId={this.state.weather.weather[0].id}
+								datetime={this.state.currentWeather.dt}
+								city={this.state.currentWeather.name}
+								temperature={this.state.currentWeather.main.temp}
+								weatherId={this.state.currentWeather.weather[0].id}
 								weatherConditions={this.state.weatherConditions} />
 							<WeatherIcon 
-								weather={this.state.weather.weather[0]}
+								weather={this.state.currentWeather.weather[0]}
 								weatherConditions={this.state.weatherConditions}
 								isLightOut={this.state.isLightOut} />
 						</div>

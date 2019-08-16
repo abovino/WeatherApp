@@ -1,7 +1,6 @@
-.app {
+body {
 	background-image: linear-gradient(to bottom right, #817b90, #9198e5);
-	height: 100vh;
-	width: 100vw;
+	background-attachment: fixed;
 	box-sizing: border-box;
 	color: #efefef;
 	overflow: auto;
@@ -13,10 +12,18 @@
 }
 
 .error-container {
+	margin: 5rem auto;
+	text-align: center;
 	animation: fadeIn 1s ease-out;
 }
 
+.error-container * {
+	font-weight: 100;
+}
+
 .desktop-container {
+	max-width: 500px;
+	margin: 0 auto;
 	animation: fadeIn 1s ease-out;
 }
 

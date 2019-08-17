@@ -1,5 +1,5 @@
 import React from 'react';
-
+import moment from 'moment-timezone';
 import './HourlyWeather.css';
 
 const HourlyWeather = ( props ) => {
@@ -8,10 +8,7 @@ const HourlyWeather = ( props ) => {
 	let hours = props.hourlyWeather.list.map( (hour, index) => {
 		// Include only the next 24 hours
 		if (index < 8) {
-			const time = new Date(hour.dt * 1000).toLocaleString('en-US', { 
-				timeZone: props.timeZone,
-				hour: '2-digit'
-			}).toLowerCase();
+			const time = moment.unix(hour.dt).tz(props.timeZone).format('h a');
 
 			let iconClasses = '';
 

@@ -6,6 +6,7 @@
     "express": "^4.16.4",
     "ip": "^1.1.5",
     "lodash": "^4.17.15",
+    "moment-timezone": "^0.5.26",
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.2",
@@ -22,15 +23,15 @@
     "extends": "react-app"
   },
   "browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
   }
 }

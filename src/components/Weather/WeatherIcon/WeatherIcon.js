@@ -4,7 +4,6 @@ import './WeatherIcon.css';
 const WeatherIcon = ( props ) => {
 	const currentWeather = props.weather;
 	const weatherConditions = props.weatherConditions;
-	// let icon = <i className="wi wi-day-cloudy-gusts"></i>;
 	let classes = '';
 	
 	for (let i = 0; i < weatherConditions.length; i++) {

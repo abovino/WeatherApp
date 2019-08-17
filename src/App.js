@@ -7,6 +7,7 @@ import WeatherDetails from './components/Weather/WeatherDetails/WeatherDetails.j
 import WeatherIcon from './components/Weather/WeatherIcon/WeatherIcon.js';
 import SunriseSunset from './components/Weather/SunriseSunset/SunriseSunset.js';
 import HourlyWeather from './components/Weather/HourlyWeather/HourlyWeather.js';
+import Loading from './components/Loading/Loading';
 
 
 class App extends Component {
@@ -19,7 +20,8 @@ class App extends Component {
 		sunrise: null,
 		sunset: null,
     timeZone: null,
-    isError: false,
+		isError: false,
+		loading: false,
 	};
 
 	searchChangeHandler = (e) => {
@@ -37,31 +39,36 @@ class App extends Component {
 		if (this.state.zipCode.length < 1) {
 			return;
 		}
-    this.getWeather(this.state.zipCode).then(({ currentWeather, hourlyWeather, timeZoneData }) => {
-      const sunrise = currentWeather.sys.sunrise; // sunrise in unix time
-      const sunset = currentWeather.sys.sunset; // sunset in unix time
-      const currentTime = currentWeather.dt; // current weather station unix time
-      const timeZone = timeZoneData.zoneName; 
-      let isLightOut = false;
 
-      if (currentTime > sunrise && currentTime < sunset) {
-        isLightOut = true;
-      }
-
-      this.setState({
-        isLightOut,
-        currentWeather,
-        hourlyWeather,
-        sunrise,
-        sunset,
-        timeZone,
-        isError: false,
-      })
-    }).catch(err => {
-      this.setState({
-        isError: true
-      })
-    })
+		this.setState({ loading: true }, () => {
+			this.getWeather(this.state.zipCode).then(({ currentWeather, hourlyWeather, timeZoneData }) => {
+				const sunrise = currentWeather.sys.sunrise; // sunrise in unix time
+				const sunset = currentWeather.sys.sunset; // sunset in unix time
+				const currentTime = currentWeather.dt; // current weather station unix time
+				const timeZone = timeZoneData.zoneName; 
+				let isLightOut = false;
+	
+				if (currentTime > sunrise && currentTime < sunset) {
+					isLightOut = true;
+				}
+	
+				this.setState({
+					isLightOut,
+					currentWeather,
+					hourlyWeather,
+					sunrise,
+					sunset,
+					timeZone,
+					isError: false,
+					loading: false,
+				})
+			}).catch(err => {
+				this.setState({
+					isError: true,
+					loading: false,
+				})
+			})
+		})
   }
 
 	async getWeather(zipCode) {
@@ -136,7 +143,7 @@ class App extends Component {
 						zipCode={this.state.zipCode}
 						handleSubmit={this.handleSubmit}
 						searchChangeHandler={this.searchChangeHandler} />
-					{weather}
+					{!this.state.loading ? weather:<Loading />}
 				</div>
 			</div>
 		);

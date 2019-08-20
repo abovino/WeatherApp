@@ -8,7 +8,8 @@ body {
 }
 
 .dark {
-	background-image: linear-gradient(to bottom right, #5a595a, #07080c);
+  background-image: linear-gradient(to bottom right, #5a595a, #07080c);
+  height: 100vh;
 }
 
 .error-container {

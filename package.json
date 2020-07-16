@@ -5,7 +5,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "ip": "^1.1.5",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment-timezone": "^0.5.26",
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",

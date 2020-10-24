@@ -1,6 +1,6 @@
 # WeatherApp
 
-[weather.angelobovino.me](https://weather.angelobovino.me)
+<a href="https://weather.angelobovino.me" target="_blank">weather.angelobovino.me</a>
 
 A weather app to display current and 24 hour weather.
 

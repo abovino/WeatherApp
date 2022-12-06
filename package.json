@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "ip": "^1.1.5",
     "lodash": "^4.17.15",
     "moment-timezone": "^0.5.26",
